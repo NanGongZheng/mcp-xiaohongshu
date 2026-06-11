@@ -1,0 +1,57 @@
+[
+  {
+    "user_id": "u_travel_deer",
+    "nickname": "旅行小鹿",
+    "desc": "环球旅行 | 攻略分享 | 用脚步丈量世界",
+    "followers": 128400,
+    "following": 356,
+    "total_likes": 892000,
+    "note_count": 247,
+    "avatar": "https://example.com/avatar_travel_deer.jpg",
+    "url": "https://www.xiaohongshu.com/user/profile/u_travel_deer"
+  },
+  {
+    "user_id": "u_coffee_baby",
+    "nickname": "手冲小白",
+    "desc": "咖啡爱好者 | 每天一杯手冲 | 分享居家咖啡技巧",
+    "followers": 45200,
+    "following": 189,
+    "total_likes": 210000,
+    "note_count": 132,
+    "avatar": "https://example.com/avatar_coffee_baby.jpg",
+    "url": "https://www.xiaohongshu.com/user/profile/u_coffee_baby"
+  },
+  {
+    "user_id": "u_skin_wei",
+    "nickname": "成分党小薇",
+    "desc": "皮肤科博士 | 成分分析 | 科学护肤不踩坑",
+    "followers": 312000,
+    "following": 98,
+    "total_likes": 1560000,
+    "note_count": 412,
+    "avatar": "https://example.com/avatar_skin_wei.jpg",
+    "url": "https://www.xiaohongshu.com/user/profile/u_skin_wei"
+  },
+  {
+    "user_id": "u_camp_sz",
+    "nickname": "城市露营家",
+    "desc": "深圳露营 | 户外生活方式 | 周末去哪儿",
+    "followers": 67800,
+    "following": 245,
+    "total_likes": 345000,
+    "note_count": 189,
+    "avatar": "https://example.com/avatar_camp_sz.jpg",
+    "url": "https://www.xiaohongshu.com/user/profile/u_camp_sz"
+  },
+  {
+    "user_id": "u_pm_zhuang",
+    "nickname": "产品经理小庄",
+    "desc": "10年产品人 | 求职辅导 | 产品思维分享",
+    "followers": 89500,
+    "following": 167,
+    "total_likes": 678000,
+    "note_count": 298,
+    "avatar": "https://example.com/avatar_pm_zhuang.jpg",
+    "url": "https://www.xiaohongshu.com/user/profile/u_pm_zhuang"
+  }
+]

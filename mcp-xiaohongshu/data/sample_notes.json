@@ -1,0 +1,57 @@
+[
+  {
+    "note_id": "6650a1c6000000001d00abcd",
+    "title": "日本旅游攻略：东京7天路线推荐",
+    "author": "旅行小鹿",
+    "user_id": "u_travel_deer",
+    "likes": 12893,
+    "collects": 8754,
+    "comments": 542,
+    "tags": ["日本旅游", "东京", "旅行攻略"],
+    "created_at": "2026-05-20"
+  },
+  {
+    "note_id": "6650a2d7000000001d00ef01",
+    "title": "咖啡拉花入门指南",
+    "author": "手冲小白",
+    "user_id": "u_coffee_baby",
+    "likes": 5387,
+    "collects": 3120,
+    "comments": 218,
+    "tags": ["咖啡", "拉花", "生活记录"],
+    "created_at": "2026-04-18"
+  },
+  {
+    "note_id": "6650a3f8000000001d001234",
+    "title": "高性价比护肤清单（油皮版）",
+    "author": "成分党小薇",
+    "user_id": "u_skin_wei",
+    "likes": 20411,
+    "collects": 15290,
+    "comments": 1034,
+    "tags": ["护肤", "油皮", "性价比"],
+    "created_at": "2026-05-01"
+  },
+  {
+    "note_id": "6650a4a1000000001d00beef",
+    "title": "深圳周末露营装备清单",
+    "author": "城市露营家",
+    "user_id": "u_camp_sz",
+    "likes": 7210,
+    "collects": 4988,
+    "comments": 319,
+    "tags": ["露营", "深圳", "生活方式"],
+    "created_at": "2026-03-29"
+  },
+  {
+    "note_id": "6650a5c2000000001d00cafe",
+    "title": "0基础转产品：简历和项目经历怎么写",
+    "author": "产品经理小庄",
+    "user_id": "u_pm_zhuang",
+    "likes": 9832,
+    "collects": 7124,
+    "comments": 654,
+    "tags": ["求职", "产品经理", "简历"],
+    "created_at": "2026-04-05"
+  }
+]
