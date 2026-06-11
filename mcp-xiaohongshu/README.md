@@ -57,6 +57,14 @@
 - Playwright（仅作为未来扩展备选）
 - SQLite（数据缓存）
 
+## 🔌 数据源 Provider
+
+- `MCP_XHS_PROVIDER=sample`：本地示例数据，开发调试用
+- `MCP_XHS_PROVIDER=apify`：Apify Actor，适合付费验证真实数据
+- `MCP_XHS_PROVIDER=http`：通用 HTTP API / 第三方聚合网关，适合 MVP 快速接入
+
+详细文档见：`docs/data-providers.md`
+
 
 > 任务A已完成，最终结论：MVP 阶段优先采用「第三方数据服务 + 官方平台补充调研」策略，不建议首发就以自建爬虫为主链路。
 >
