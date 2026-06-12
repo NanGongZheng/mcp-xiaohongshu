@@ -213,8 +213,17 @@ mcp-xiaohongshu/
 ## 开发
 
 ```bash
+# 一键演示（默认 sample 数据源）
+python scripts/demo.py
+
+# 使用真实 HTTP API 数据源
+MCP_XHS_PROVIDER=http \
+MCP_XHS_API_BASE_URL=https://your-api.example.com \
+python scripts/demo.py
+
 # 运行测试
 python tests/test_server.py
+python tests/test_http_provider.py
 
 # 手动测试 MCP 协议
 printf '{"jsonrpc":"2.0","id":1,"method":"initialize"}\n{"jsonrpc":"2.0","id":2,"method":"tools/list"}\n' | python server.py

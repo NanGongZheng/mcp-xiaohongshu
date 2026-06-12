@@ -303,11 +303,11 @@
 - **预计时间**：1 天
 - **输出**：GitHub 仓库和第一个 Release
 
-#### D2. 社区推广（待继续）
-- [ ] 提交到 awesome-mcp-servers
-- [ ] 在 V2EX 发帖
-- [ ] 在即刻发帖
-- [ ] 在掘金发帖
+#### D2. 社区推广 ✅ 文案已就绪（2026-06-12）
+- [ ] 提交到 awesome-mcp-servers（文案已备好：`docs/promotion-awesome-mcp.md`）
+- [ ] 在 V2EX 发帖（文案已备好：`docs/promotion-v2ex.md`）
+- [ ] 在即刻发帖（文案已备好：`docs/promotion-jike.md`）
+- [ ] 在掘金发帖（文案已备好：`docs/promotion-juejin.md`）
 - **预计时间**：2-3 天
 - **输出**：社区推广帖子
 
