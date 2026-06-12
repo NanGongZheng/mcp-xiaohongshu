@@ -295,11 +295,11 @@
 
 ### 🚀 并行任务组 D：发布和推广（可同时进行）
 
-#### D1. GitHub 发布（待继续）
-- [ ] 创建 GitHub 仓库
-- [ ] 配置 CI/CD
-- [ ] 发布第一个版本
-- [ ] 创建 Release Notes
+#### D1. GitHub 发布 ✅ 已完成（2026-06-12）
+- [x] 创建 GitHub 仓库：https://github.com/NanGongZheng/mcp-xiaohongshu
+- [ ] 配置 CI/CD（后续补充）
+- [x] 发布第一个版本（v0.1.0，已推送到 main）
+- [ ] 创建 Release Notes（后续补充）
 - **预计时间**：1 天
 - **输出**：GitHub 仓库和第一个 Release
 
