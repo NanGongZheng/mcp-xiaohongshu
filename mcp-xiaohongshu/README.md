@@ -1,115 +1,78 @@
 # MCP 小红书数据 Server
 
-基于 MCP 协议的小红书数据查询服务器，让 AI 能够搜索和分析小红书内容。
+[![MCP](https://img.shields.io/badge/MCP-2025--11--25-blue)](https://modelcontextprotocol.io)
+[![Python](https://img.shields.io/badge/Python-3.9+-green)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-## 🎯 核心功能
+让 AI 能够搜索和分析小红书内容的 MCP Server。接入 Claude Desktop、Cursor、Codex 等任意 MCP 客户端即可使用。
 
-### Tools（工具）
+## 快速开始
 
-1. **search_notes** - 搜索小红书笔记
-   - 参数：keyword（关键词）、limit（数量）、sort（排序方式）
-   - 返回：笔记列表（标题、作者、点赞数、收藏数等）
+### 1. 克隆并运行
 
-2. **get_note_detail** - 获取笔记详情
-   - 参数：note_id（笔记ID）
-   - 返回：笔记完整内容、图片、评论等
+```bash
+git clone https://github.com/yourname/mcp-xiaohongshu.git
+cd mcp-xiaohongshu
 
-3. **get_user_profile** - 获取用户主页信息
-   - 参数：user_id（用户ID）
-   - 返回：用户信息、粉丝数、笔记数等
+# 直接运行（使用内置示例数据，无需额外配置）
+python server.py
+```
 
-4. **get_user_notes** - 获取用户的笔记列表
-   - 参数：user_id（用户ID）、limit（数量）
-   - 返回：用户发布的笔记列表
+### 2. 连接到 Claude Desktop
 
-5. **get_hot_topics** - 获取热门话题
-   - 参数：category（分类，可选）
-   - 返回：当前热门话题和标签
+编辑 `~/Library/Application Support/Claude/claude_desktop_config.json`：
 
-### Resources（资源）
+```json
+{
+  "mcpServers": {
+    "xiaohongshu": {
+      "command": "python",
+      "args": ["/absolute/path/to/mcp-xiaohongshu/server.py"]
+    }
+  }
+}
+```
 
-- `xhs://trending` - 小红书热门内容
-- `xhs://categories` - 内容分类列表
+### 3. 连接到 Cursor
 
-## 🏗️ 技术方案
+在项目根目录创建 `.cursor/mcp.json`：
 
-### 数据获取方式
+```json
+{
+  "mcpServers": {
+    "xiaohongshu": {
+      "command": "python",
+      "args": ["/absolute/path/to/mcp-xiaohongshu/server.py"]
+    }
+  }
+}
+```
 
-**方案 A：第三方数据服务 / 聚合 API（当前推荐）**
-- 优先接入第三方数据接口，快速验证产品价值
-- 优点：落地快、维护成本低、适合 MVP
-- 缺点：需评估供应商稳定性、成本与字段完整度
+### 4. 使用真实数据（可选）
 
-**方案 B：自建爬虫**
-- 使用 Playwright/Selenium 模拟浏览器
-- 优点：完全免费、可定制
-- 缺点：需要处理反爬、维护成本高
+```bash
+# 方式一：Apify（推荐，稳定可靠）
+MCP_XHS_PROVIDER=apify \
+APIFY_API_TOKEN=your_token \
+python server.py
 
-**方案 C：第三方 API**
-- 使用数据市场/聚合平台的小红书 API
-- 优点：简单易用
-- 缺点：可能不稳定、需要付费
+# 方式二：通用 HTTP API
+MCP_XHS_PROVIDER=http \
+MCP_XHS_API_BASE_URL=https://your-api.example.com \
+python server.py
+```
 
-### 技术栈
+## Tools（工具）
 
-- Python 3.9+
-- MCP Python SDK（或手写 JSON-RPC）
-- Playwright（仅作为未来扩展备选）
-- SQLite（数据缓存）
+| 工具 | 说明 | 参数 |
+|------|------|------|
+| `search_notes` | 搜索小红书笔记 | `keyword`（必填）、`limit`、`sort` |
+| `get_note_detail` | 获取笔记详情 | `note_id`（必填） |
+| `get_user_profile` | 获取用户主页信息 | `user_id`（必填） |
+| `get_user_notes` | 获取用户笔记列表 | `user_id`（必填）、`limit` |
+| `get_hot_topics` | 获取热门话题 | `category`（可选） |
 
-## 🔌 数据源 Provider
-
-- `MCP_XHS_PROVIDER=sample`：本地示例数据，开发调试用
-- `MCP_XHS_PROVIDER=apify`：Apify Actor，适合付费验证真实数据
-- `MCP_XHS_PROVIDER=http`：通用 HTTP API / 第三方聚合网关，适合 MVP 快速接入
-
-详细文档见：`docs/data-providers.md`
-
-
-> 任务A已完成，最终结论：MVP 阶段优先采用「第三方数据服务 + 官方平台补充调研」策略，不建议首发就以自建爬虫为主链路。
->
-> 详见：`mcp-xiaohongshu/数据获取方案调研报告.md`
-
-## ✅ 当前进展（Task B 执行记录）
-
-- **B1 框架搭建**：已完成（JSON-RPC 2.0 MCP 框架 + stdio 启动 + `initialize/tools/list/tools/call` 链路）
-- **B2 search_notes**：已完成，支持关键词/排序/数量参数
-- **B3 get_note_detail**：已完成，返回笔记详情+作者信息+URL
-- **B4 get_user_profile**：已完成，返回粉丝数/获赞数/笔记数等
-- **B5 get_user_notes**：已完成，返回用户笔记列表
-- **B6 get_hot_topics**：已完成，支持按分类筛选热门话题
-- **数据源抽象**：已创建 `providers/` 接口层，支持 sample（默认）和 apify 两种数据源，切换只需设置 `MCP_XHS_PROVIDER` 环境变量
-- **测试**：`tests/test_server.py` 覆盖 B1-B6 全部工具，全部通过 ✅
-
-> 框架 + 全部 5 个 Tool 已就绪。下一步是接入真实小红书数据源（Apify / 自建爬虫）。
-
-## 📋 开发计划
-
-### Phase 1：基础框架（1-2天）
-- [ ] 设计数据模型
-- [ ] 实现 MCP Server 框架
-- [ ] 实现 search_notes 功能
-
-### Phase 2：核心功能（3-5天）
-- [ ] 实现 get_note_detail
-- [ ] 实现 get_user_profile
-- [ ] 实现 get_user_notes
-- [ ] 数据缓存机制
-
-### Phase 3：高级功能（6-7天）
-- [ ] 实现 get_hot_topics
-- [ ] 数据分析和统计
-- [ ] 批量查询支持
-
-### Phase 4：优化和发布（8-14天）
-- [ ] 性能优化
-- [ ] 错误处理
-- [ ] 文档完善
-- [ ] 发布到 GitHub
-
-## 🔧 使用示例
-
-### 搜索笔记
+### search_notes
 
 ```json
 {
@@ -125,7 +88,33 @@
 }
 ```
 
-### 获取笔记详情
+**参数说明：**
+- `keyword`（string，必填）：搜索关键词
+- `limit`（int，可选）：返回数量上限，默认 10
+- `sort`（string，可选）：排序方式，`relevance` | `popularity` | `latest`
+
+**返回示例：**
+```json
+{
+  "keyword": "日本旅游攻略",
+  "sort": "popularity",
+  "count": 2,
+  "notes": [
+    {
+      "note_id": "6650a1c6000000001d00abcd",
+      "title": "日本旅游攻略：东京7天路线推荐",
+      "author": "旅行小鹿",
+      "likes": 12893,
+      "collects": 8754,
+      "comments": 542,
+      "tags": ["日本旅游", "东京", "旅行攻略"],
+      "created_at": "2026-05-20"
+    }
+  ]
+}
+```
+
+### get_note_detail
 
 ```json
 {
@@ -133,25 +122,124 @@
   "params": {
     "name": "get_note_detail",
     "arguments": {
-      "note_id": "6572f123000000001d02xxxx"
+      "note_id": "6650a1c6000000001d00abcd"
     }
   }
 }
 ```
 
-## 💰 变现路径
+### get_user_profile
 
-1. **开源基础版** - 吸引用户
-2. **高级功能付费** - 批量查询、数据分析、导出报告
-3. **SaaS 月费** - 托管版，按月收费
-4. **定制开发** - 为企业定制功能
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "get_user_profile",
+    "arguments": {
+      "user_id": "u_skin_wei"
+    }
+  }
+}
+```
 
-## 📚 参考资源
+### get_user_notes
 
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "get_user_notes",
+    "arguments": {
+      "user_id": "u_travel_deer",
+      "limit": 5
+    }
+  }
+}
+```
+
+### get_hot_topics
+
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "get_hot_topics",
+    "arguments": {
+      "category": "护肤"
+    }
+  }
+}
+```
+
+## 项目结构
+
+```
+mcp-xiaohongshu/
+├── server.py                  # MCP Server 主程序
+├── providers/
+│   ├── __init__.py            # 数据源工厂
+│   ├── base.py                # 数据源抽象接口（XhsDataSource）
+│   ├── sample.py              # 示例数据源（开发/测试用）
+│   ├── apify.py               # Apify 数据源（真实数据）
+│   └── http.py                # 通用 HTTP API 数据源
+├── data/
+│   ├── sample_notes.json      # 示例笔记数据
+│   ├── sample_users.json      # 示例用户数据
+│   └── sample_topics.json     # 示例热门话题
+├── tests/
+│   ├── test_server.py         # B1-B6 全量测试
+│   └── test_http_provider.py  # HTTP Provider 测试
+├── docs/
+│   └── data-providers.md      # 数据源 Provider 详细指南
+└── README.md                  # 本文件
+```
+
+## 数据源 Provider
+
+| Provider | 说明 | 适合阶段 |
+|----------|------|----------|
+| `sample` | 本地示例数据 | 开发/测试 |
+| `apify` | Apify Actor 获取真实数据 | 付费验证 |
+| `http` | 通用 HTTP API / 第三方网关 | MVP / 商业验证 |
+
+详细配置见 [`docs/data-providers.md`](docs/data-providers.md)。
+
+**添加自定义数据源：**
+
+1. 在 `providers/` 下新建文件，继承 `XhsDataSource`（`providers/base.py`）
+2. 实现 5 个抽象方法：`search_notes`、`get_note_detail`、`get_user_profile`、`get_user_notes`、`get_hot_topics`
+3. 在 `providers/__init__.py` 的 `create_datasource()` 中注册
+
+## 开发
+
+```bash
+# 运行测试
+python tests/test_server.py
+
+# 手动测试 MCP 协议
+printf '{"jsonrpc":"2.0","id":1,"method":"initialize"}\n{"jsonrpc":"2.0","id":2,"method":"tools/list"}\n' | python server.py
+```
+
+## 安全设计
+
+- 所有数据获取均通过 Provider 抽象层，Server 不直接访问网络
+- 支持只读模式（仅查询，不写入）
+- 参数校验：所有 Tool 参数均通过 JSON Schema 验证
+- 无状态设计：不存储用户数据，不保留会话
+
+## 变现路径
+
+1. **开源基础版** — 吸引用户，建立社区
+2. **高级功能付费** — 批量查询、数据分析、导出报告
+3. **SaaS 月费** — 托管版，按月收费
+4. **定制开发** — 为企业定制功能
+
+## 参考资源
+
+- [MCP 官方文档](https://modelcontextprotocol.io)
 - [小红书开放平台](https://open.xiaohongshu.com/)
 - [Apify 小红书爬虫](https://apify.com/)
-- [MCP 官方文档](https://modelcontextprotocol.io)
 
-## 📄 许可证
+## 许可证
 
 MIT License
